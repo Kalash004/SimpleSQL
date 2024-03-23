@@ -1,1 +1,0 @@
-from SimpleSql.Core.QueryBuilder.QueryBuilder import SimpleQueryBuilder
