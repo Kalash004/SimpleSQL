@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import SimpleSql
-from SimpleSql.Models.Models.SQLHolder import SimpleSQLHolder as Holder
+from ...Models.Models.SQLHolder import SimpleSQLHolder as Holder
+from ...Models.Enums.SimpleConstraintsEnum import SimpleConstraints as Constraints
 
 if TYPE_CHECKING:
-    from SimpleSql.Models.Models.SimpleReference import SimpleReference
+    from ...Models.Models.SimpleReference import SimpleReference
 
 
 class SimpleQueryBuilder:
@@ -60,7 +60,7 @@ class SimpleQueryBuilder:
         middle = ""
         pk = None
         for attribute in table_copy:
-            if SimpleSql.Constraints.PK in attribute[1].constraints:
+            if Constraints.PK in attribute[1].constraints:
                 pk = attribute
             name = attribute[0]
             middle += f" `{name}`={self.changeable_sign}, "
@@ -73,7 +73,7 @@ class SimpleQueryBuilder:
     def __build_delete(self, table_name, table_copy):
         pk = None
         for attribute in table_copy:
-            if SimpleSql.Constraints.PK in attribute[1].constraints:
+            if Constraints.PK in attribute[1].constraints:
                 pk = attribute
         return f"DELETE FROM `{table_name}` WHERE {pk[0]} = {self.changeable_sign};"
 

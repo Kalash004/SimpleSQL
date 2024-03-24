@@ -1,6 +1,6 @@
 import inspect
 
-from SimpleSql.Core.Controller.Controller import Controller
+from ...Core.Controller.Controller import Controller
 
 
 class SimpleBaseTable:

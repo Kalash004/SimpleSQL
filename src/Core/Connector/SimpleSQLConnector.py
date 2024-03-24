@@ -5,9 +5,10 @@ import typing
 import mysql.connector
 from mysql.connector import DatabaseError
 
-import SimpleSql.Models.Configs.SimpleSQLDbConfig as Config
-from SimpleSql.Core.Exceptions.ConnectionException import ConnectionException
-from SimpleSql.Models.Enums.StateEnum import ConnectionState
+
+from ...Models.Configs.SimpleSQLDbConfig import SimpleSQLDbConfig as Config
+from ...Core.Exceptions.ConnectionException import ConnectionException
+from ...Models.Enums.StateEnum import ConnectionState
 
 
 class SimpleSQLConnector:

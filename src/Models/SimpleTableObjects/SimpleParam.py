@@ -1,5 +1,5 @@
-from SimpleSql.Models.Enums.SimpleConstraintsEnum import SimpleConstraints
-from SimpleSql.Models.Enums.SimpleDataTypesEnum import SimpleTypes
+from ...Models.Enums.SimpleConstraintsEnum import SimpleConstraints
+from ...Models.Enums.SimpleDataTypesEnum import SimpleTypes
 
 
 class SimpleParam:

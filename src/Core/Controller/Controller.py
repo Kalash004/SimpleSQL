@@ -3,11 +3,14 @@ from __future__ import annotations
 import typing
 from typing import TYPE_CHECKING
 
-import SimpleSql
-from SimpleSql.Core.QueryBuilder.QueryBuilder import SimpleQueryBuilder as Builder
+from ...Core.Connector.SimpleSQLConnector import SimpleSQLConnector as Connector
+from ...Models.Models.SQLHolder import SimpleSQLHolder as Holder
+from ...Core.QueryBuilder.QueryBuilder import SimpleQueryBuilder as Builder
+from ...Models.Enums.SimpleConstraintsEnum import SimpleConstraints as Constraints
 
 if TYPE_CHECKING:
-    from SimpleSql.Models.Configs.SimpleSQLDbConfig import SimpleSQLDbConfig as Config
+    from ...Models.SimpleTableObjects.Base import Base
+    from ...Models.Configs.SimpleSQLDbConfig import SimpleSQLDbConfig as Config
 
 
 class Controller:
@@ -24,8 +27,8 @@ class Controller:
         # TODO: ADD INPUT CHECK
         if db_config is not None:
             self.config = db_config
-            self.connector: SimpleSql.Connector
-            self.__query_obj: SimpleSql.Holder
+            self.connector: Connector
+            self.__query_obj: Holder
 
     def _add_table(self, table):
         # TODO: ADD INPUT CHECK
@@ -46,7 +49,7 @@ class Controller:
             # Build queries
             if self.config is None:
                 raise Exception("Database config was not given")
-            self.connector = SimpleSql.Connector(db_config=self.config)
+            self.connector = Connector(db_config=self.config)
             self.__query_obj = self.build_queries()
             # Check if database exists
             if not self.database_exists():
@@ -145,7 +148,7 @@ class Controller:
             if isinstance(resp, Exception):
                 raise resp
 
-    def select_data_where(self, obj: type(SimpleSql.Base), selectors: []) -> object:
+    def select_data_where(self, obj: type(Base), selectors: []) -> object:
         # TODO: ADD INPUT CHECK
         # TODO: Possibility of sql injections, try to fix
         # TODO: Separate query building to QueryBuilder
@@ -181,7 +184,7 @@ class Controller:
             # TODO: Better exceptions
             raise
 
-    def select_all_from(self, obj: type(SimpleSql.Base)):
+    def select_all_from(self, obj: type(Base)):
         # TODO: ADD INPUT CHECK
         query = self.__query_obj[obj.table_name].select
         try:
@@ -215,7 +218,7 @@ class Controller:
         except Exception:
             raise
 
-    def update_data(self, new: SimpleSql.Base):
+    def update_data(self, new: Base):
         # TODO: ADD INPUT CHECK
         table_name = new.table_name
         query = self.__query_obj[table_name].update
@@ -252,7 +255,7 @@ class Controller:
             # TODO: Better exceptions handling
             raise
 
-    def delete_data(self, to_delete: SimpleSql.Base):
+    def delete_data(self, to_delete: Base):
         # TODO: ADD INPUT CHECK
         table_name = to_delete.table_name
         pk = self.__find_primary_key_value(to_delete)
@@ -292,18 +295,18 @@ class Controller:
             return self.__map_to_obj(instance, resp[0])
         return []
 
-    def __find_primary_key_name(self, instance: SimpleSql.Base):
+    def __find_primary_key_name(self, instance: Base):
         table_name = instance.table_name
         pk = None
         for attr in self.__tables[table_name].struct:
             if attr[0] == "table_name":
                 continue
-            if SimpleSql.Constraints.PK in attr[1].constraints:
+            if Constraints.PK in attr[1].constraints:
                 pk = attr[0]
                 break
         return pk
 
-    def __find_primary_key_value(self, instance: SimpleSql.Base):
+    def __find_primary_key_value(self, instance: Base):
         pk = self.__find_primary_key_name(instance)
         return instance.__dict__[pk]
 

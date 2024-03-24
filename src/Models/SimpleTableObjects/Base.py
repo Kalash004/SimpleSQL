@@ -1,6 +1,6 @@
 import inspect
 
-from SimpleSql.Models.SimpleTableObjects.SimpleTable import SimpleBaseTable
+from ...Models.SimpleTableObjects.SimpleTable import SimpleBaseTable
 
 
 class Base:
