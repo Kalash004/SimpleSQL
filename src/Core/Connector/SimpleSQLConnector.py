@@ -5,10 +5,7 @@ import typing
 import mysql.connector
 from mysql.connector import DatabaseError
 
-
-from ...Models.Configs.SimpleSQLDbConfig import SimpleSQLDbConfig as Config
-from ...Core.Exceptions.ConnectionException import ConnectionException
-from ...Models.Enums.StateEnum import ConnectionState
+from ... import Config, ConnectionException, ConnectionState
 
 
 class SimpleSQLConnector:

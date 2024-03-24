@@ -1,6 +1,6 @@
 import inspect
 
-from ...Models.SimpleTableObjects.SimpleTable import SimpleBaseTable
+from ... import SimpleBaseTable
 
 
 class Base:

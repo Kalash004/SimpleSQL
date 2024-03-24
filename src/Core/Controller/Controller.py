@@ -3,14 +3,11 @@ from __future__ import annotations
 import typing
 from typing import TYPE_CHECKING
 
-from ...Core.Connector.SimpleSQLConnector import SimpleSQLConnector as Connector
-from ...Models.Models.SQLHolder import SimpleSQLHolder as Holder
-from ...Core.QueryBuilder.QueryBuilder import SimpleQueryBuilder as Builder
-from ...Models.Enums.SimpleConstraintsEnum import SimpleConstraints as Constraints
+from ... import Connector, Holder, Builder, Constraints
 
 if TYPE_CHECKING:
-    from ...Models.SimpleTableObjects.Base import Base
-    from ...Models.Configs.SimpleSQLDbConfig import SimpleSQLDbConfig as Config
+    from ... import Base
+    from ... import Config
 
 
 class Controller:

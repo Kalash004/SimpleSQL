@@ -1,12 +1,12 @@
-from ...Models.Enums.SimpleConstraintsEnum import SimpleConstraints
-from ...Models.Enums.SimpleDataTypesEnum import SimpleTypes
+from ... import Constraints
+from ... import Types
 
 
 class SimpleParam:
 
-    def __init__(self, datatype: SimpleTypes, *constraints: [SimpleConstraints], **other):
-        self.datatype: SimpleTypes = datatype
-        self.constraints: [SimpleConstraints] = constraints
+    def __init__(self, datatype: Types, *constraints: [Constraints], **other):
+        self.datatype: Types = datatype
+        self.constraints: [Constraints] = constraints
         try:
             self.references = other["references"]
             if not isinstance(self.references, type([])):

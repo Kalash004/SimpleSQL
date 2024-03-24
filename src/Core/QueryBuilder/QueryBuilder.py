@@ -2,11 +2,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from ...Models.Models.SQLHolder import SimpleSQLHolder as Holder
-from ...Models.Enums.SimpleConstraintsEnum import SimpleConstraints as Constraints
+from ... import Holder, Constraints
 
 if TYPE_CHECKING:
-    from ...Models.Models.SimpleReference import SimpleReference
+    from ... import SimpleReference
 
 
 class SimpleQueryBuilder:

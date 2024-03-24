@@ -1,6 +1,6 @@
 import inspect
 
-from ...Core.Controller.Controller import Controller
+from ... import App
 
 
 class SimpleBaseTable:
@@ -12,7 +12,7 @@ class SimpleBaseTable:
         self.__send_table_to_control()
 
     def __send_table_to_control(self):
-        app = Controller()
+        app = App()
         app._add_table(self)
         # Send table object to the controller singleton
 
